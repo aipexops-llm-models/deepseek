@@ -18,11 +18,11 @@ spec:
         image: ghcr.io/open-webui/open-webui:main
         resources:
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "2048Mi"
+            cpu: "1000m"
           requests:
-            memory: "256Mi"
-            cpu: "250m"
+            memory: "2048Mi"
+            cpu: "500m"
         ports:
         - containerPort: 8080
         volumeMounts:
@@ -33,6 +33,8 @@ spec:
           value: "ollama-service"
         - name: OLLAMA_PORT
           value: "11434"
+        - name: OLLAMA_BASE_URL
+          value: http://hemas9:31085
       volumes:
       - name: open-webui-storage
         persistentVolumeClaim:

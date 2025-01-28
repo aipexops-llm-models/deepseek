@@ -4,7 +4,7 @@ metadata:
   name: ollama-service
   namespace: deepseek
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 11434
       targetPort: 11434
