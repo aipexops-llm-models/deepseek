@@ -1,4 +1,4 @@
-# Deepseek local instance running on Ollama
+# Deepseek local instance running on Docker/Ollama
 
 # Installing Ollama
 docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
@@ -13,7 +13,7 @@ docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-
 http://localhost:3000 - and Create a test user: testuser/testuser
 
 
-# On MicroK8s
+# Deepseek local instance running on MicroK8s
 
 - kubectl apply -f pv.yaml
 - kubectl apply -f pvc.yaml
@@ -26,3 +26,5 @@ http://localhost:3000 - and Create a test user: testuser/testuser
 - kubectl apply -f deployment-webgui.yaml
 - kubectl apply -f service-webgui.yaml
 - kubectl port-forward -n deepseek svc/open-webui-service 31434:8080
+
+http://localhost:31434 - and Create a test user: testuser/testuser
