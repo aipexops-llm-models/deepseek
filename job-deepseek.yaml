@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: deepseek-job
+  namespace: deepseek
+spec:
+  template:
+    spec:
+      containers:
+      - name: ollama
+        image: ollama/ollama
+        command: ["ollama", "run", "deepseek-r1:7b"]
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      restartPolicy: Never
+  backoffLimit: 4
