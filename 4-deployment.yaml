@@ -13,6 +13,7 @@ spec:
       labels:
         app: ollama
     spec:
+      nodeName: hemas9 
       containers:
       - name: ollama
         image: ollama/ollama
@@ -21,6 +22,13 @@ spec:
         volumeMounts:
         - mountPath: "/root/.ollama"
           name: ollama-storage
+        resources:
+          requests:
+            memory: "200Gi"
+            cpu: "35"
+          limits:
+            memory: "200Gi"
+            cpu: "35"
       volumes:
       - name: ollama-storage
         persistentVolumeClaim:

@@ -19,7 +19,10 @@ http://localhost:3000 - and Create a test user: testuser/testuser
 - kubectl apply -f pvc.yaml
 - kubectl apply -f deployment.yaml
 - kubectl apply -f service.yaml
+
+# Run the model as the resources you have - full model 671B
 - kubectl exec $(kubectl get pods -n deepseek --no-headers -o custom-columns=":metadata.name") -n deepseek -- ollama run deepseek-r1:7b
+- kubectl exec $(kubectl get pods -n deepseek --no-headers -o custom-columns=":metadata.name") -n deepseek -- ollama run deepseek-r1:70b-llama-distill-fp16
 
 - kubectl apply -f pv-webgui.yaml
 - kubectl apply -f pvc-webgui.yaml
