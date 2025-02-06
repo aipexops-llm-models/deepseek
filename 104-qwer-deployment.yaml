@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-qwer-deployment
+  namespace: ollama-qwer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama-qwer
+  template:
+    metadata:
+      labels:
+        app: ollama-qwer
+    spec:
+      nodeName: hp03
+      containers:
+      - name: ollama
+        image: ollama/ollama
+        ports:
+        - containerPort: 11434
+        volumeMounts:
+        - mountPath: "/models"
+          name: ollama-qwer-storage
+        resources:
+          requests:
+            memory: "10Gi"
+            cpu: "4"
+          limits:
+            memory: "10Gi"
+            cpu: "4"
+      volumes:
+      - name: ollama-qwer-storage
+        persistentVolumeClaim:
+          claimName: ollama-qwer-pvc

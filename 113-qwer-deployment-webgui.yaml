@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-webui-deployment
+  namespace: ollama-qwer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama-qwer-webui
+  template:
+    metadata:
+      labels:
+        app: ollama-qwer-webui
+    spec:
+      nodeName: hp03
+      containers:
+      - name: ollama-qwer-webui
+        image: ghcr.io/open-webui/open-webui:main
+        resources:
+          limits:
+            memory: "2048Mi"
+            cpu: "1000m"
+          requests:
+            memory: "2048Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: "/app/backend/data"
+          name: open-webui-storage
+        env:
+        - name: OLLAMA_HOST
+          value: "ollama-service"
+        - name: OLLAMA_PORT
+          value: "11434"
+        - name: OLLAMA_BASE_URL
+          value: http://hp03:31432
+      volumes:
+      - name: open-webui-storage
+        persistentVolumeClaim:
+          claimName: ollama-webui-pvc
